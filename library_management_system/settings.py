@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-&13n(78^x_lq2jo%h(*1(^e2)*zu$$$bv!%jv5ma%8d5@3h(73
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://mk-library-management-system.onrender.com"]
+#ALLOWED_HOSTS = ['https://mk-library-management-system.onrender.com']
+ALLOWED_HOSTS = ['mk-library-management-system.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
