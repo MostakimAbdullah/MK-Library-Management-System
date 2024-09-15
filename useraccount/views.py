@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from book.models import Book,BookCategory
 from django.core.mail import EmailMessage,EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def RegisterView(request):
     if request.method == 'POST':
@@ -34,7 +35,7 @@ def LoginView(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form, 'type': 'Login'})
 
-
+@login_required
 def Logoutview(request):
     logout(request)
     messages.success(request, 'Logout successfully.')
@@ -48,6 +49,8 @@ def home(request, category_slug = None):
     category=BookCategory.objects.all()
     return render(request, 'home.html', {'books': books, 'cat':category})
 
+
+@login_required
 def depositmoney(request):
     if request.method == 'POST':
         form = DepositForm(request.POST)

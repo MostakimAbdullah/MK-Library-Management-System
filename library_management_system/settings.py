@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
+LOGIN_URL = '/useraccount/login/'
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [

@@ -23,15 +23,15 @@ Details Page
     {% if cmt %}
     <h2>Reviews</h2> 
     {% for i in cmt %}
-    <div class="card mb-3">
-        <div class="card-body">
           {% if i.book.title == book.title %}
             {% if i.name is not None %}
+            <div class="card mb-3">
+              <div class="card-body">
                 <p><b>{{i.name}}</b> made an opinion about <b>{{i.book.title}}</b></p>
                 <p>{{i.review_text}}</p>
                 <p><b>Rating:</b> {{i.user_rating}}</p>
-            {% else %}
-            <p>No one made an opinion about <b>{{i.book.title}}</b></p>
+              </div>
+            </div>   
             {% endif %}
           {% else %}
           <div class="card mb-4">
@@ -40,8 +40,7 @@ Details Page
             </div>
           </div>
           {% endif %}
-        </div>
-      </div>
+        
     {% endfor %}
   {% endif %}
 </div>

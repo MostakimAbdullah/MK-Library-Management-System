@@ -5,6 +5,7 @@ from django.contrib import messages
 from book.forms import ReviewForm
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage,EmailMultiAlternatives
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def send_transaction_email(user, book, subject, template):
      message = render_to_string(template,{
@@ -15,14 +16,7 @@ def send_transaction_email(user, book, subject, template):
      send_email.attach_alternative(message, "text/html")
      send_email.send()
      
-
-
-
-
-
-
-
-
+@login_required
 def Book_detail(request,id):
         book = Book.objects.get(pk=id)
         has_borrowed = False
@@ -55,6 +49,8 @@ def Book_detail(request,id):
         review=UserReview.objects.filter(book=book)
         return render(request, 'books_details.html', {'book':book, 'form': form,'cmt': review, 'borrow': has_borrowed})
 
+
+@login_required
 def buy_book(request,id=None):
     if id is not None:
         newBook=Book.objects.get(pk=id)
@@ -84,7 +80,7 @@ def buy_book(request,id=None):
     book = BorrowBook.objects.filter(user=request.user.account)
     return render(request, 'profile.html', {'book': book})
 
-        
+@login_required       
 def return_book(request,id):
     book=BorrowBook.objects.get(pk=id)
     book.is_borrowed=False
