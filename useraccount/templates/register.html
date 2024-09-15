@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{%  block title %}
+Registration Form
+{% endblock %}
+{% block content %}
+<div>
+    <form method="post" class="w-50 m-auto mb-5 mt-3">
+        {% csrf_token %}
+        <h1>{{type}} Page</h1>
+        <!-- {{form | crispy}} -->
+        {% for fm in form %}
+        {{ fm.label_tag}}
+        {{ fm }}
+        {{ fm.errors | striptags}}
+        {% endfor %}
+        <br>
+        <button class="btn btn-primary" type="submit">Register</button>
+        <h5> Already have an account <span><a href="{% url 'login' %}" style="text-decoration: none; color: brown">Login</a></span></h5>
+    </form>
+</div>
+{% endblock %}

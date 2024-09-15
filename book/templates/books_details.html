@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Details Page
+{% endblock %}
+{% block content %}
+<div class="d-flex container m-auto row mt-5 justify-content-center">
+    <div class="col-6 p-5">
+        <img src="{{book.image.url}}" class="w-50 mx-5" alt="">
+    </div>
+    <div class="col-6 p-5">
+        <h1>{{ book.title }}</h1>
+        <p class="fs-4">Description: {{ book.description }}</p>
+        <h4>Price: ${{book.borrowing_price}}</h4>
+        <h4>Category: {{book.book_category}} </h4>
+        <br>
+        <a href="{% url 'buy' book.id %}" class="btn btn-secondary">Buy Now</a>
+    </div>
+</div>
+
+<div class="w-50 m-auto">
+
+    {% if cmt %}
+    <h2>Reviews</h2> 
+    {% for i in cmt %}
+    <div class="card mb-3">
+        <div class="card-body">
+          {% if i.book.title == book.title %}
+            {% if i.name is not None %}
+                <p><b>{{i.name}}</b> made an opinion about <b>{{i.book.title}}</b></p>
+                <p>{{i.review_text}}</p>
+                <p><b>Rating:</b> {{i.user_rating}}</p>
+            {% else %}
+            <p>No one made an opinion about <b>{{i.book.title}}</b></p>
+            {% endif %}
+          {% else %}
+          <div class="card mb-4">
+            <div class="card-body">
+              <p>No reviews yet!</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+    
+
+{% if borrow == True %}
+    <div>
+        <form method="post" class="w-50 m-auto mb-5 mt-3">
+            {% csrf_token %}
+            <h1>Review</h1>
+            <!-- {{form | crispy}} -->
+            {% for fm in form %}
+            {{ fm.label_tag}}
+            {{ fm }}
+            {{ fm.errors | striptags}}
+            {% endfor %}
+            <br>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+{% endif %}
+
+
+    
+{% endblock %}

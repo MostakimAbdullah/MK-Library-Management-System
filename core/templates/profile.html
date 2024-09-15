@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile Page
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4 fst-italic">Borrowing History Report</h1>
+<table class="table w-75 m-auto mt-5">
+    <thead>
+      <tr>
+        <!-- <th scope="col">Book ID</th> -->
+        <th scope="col">Book Title</th>
+        <th scope="col">Book Price</th>
+        <th scope="col">Borrowed Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">Book Status</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in book %}
+      <tr>
+        <!-- <td>{{i.id}}</td> -->
+        <td>{{i.book_title}}</td>
+        <td>{{i.book_price}}</td>
+        <td>{{i.borrow_date}}</td>
+        <td>{{i.book_category}}</td>
+        {% if i.is_borrowed %}
+        <td><a href="{% url 'return' i.id %}" class="btn btn-danger btn-sm">Return</a></td>
+        {% else %}
+        <td style="color: red;">Returned</td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
