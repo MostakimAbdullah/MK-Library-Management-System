@@ -30,6 +30,9 @@ DEBUG = True
 #ALLOWED_HOSTS = ['https://mk-library-management-system.onrender.com']
 ALLOWED_HOSTS = ['mk-library-management-system.onrender.com', '127.0.0.1', 'localhost']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://mk-library-management-system.onrender.com',
+]
 
 # Application definition
 
